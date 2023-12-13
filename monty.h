@@ -6,7 +6,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <unistd.h>
-#include "marcros.h"
+#include "macros.h"
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -42,5 +42,20 @@ typedef struct instruction_s
 
 
 
+
+typedef struct monty_s
+{
+        char **_line;
+        char **_words;
+        stack_t *_stack;
+        FILE *_file;
+        int stk_or_que;
+        int line_num
+
+} monty_t ;
+
+
+int file_err(FILE *file_ptr, char *arg)
+int args_error(int argc)
 
 #endif
