@@ -19,14 +19,14 @@ int main(void)
 	stack = malloc(sizeof(stack_t));
 	if (stack == NULL)
 		return (0);
-	opcode = malloc(MAX_OPCODE_LENGTH);
+	opcode = malloc(sizeof(char) * 100);
 	if (opcode == NULL)
 	{
 		perror("Error allocating memory for opcode");
 		free(stack);
 		return (0);
 	}
-	value = malloc(MAX_VALUE_LENGTH);
+	value = malloc(sizeof(char) * 100);
 	if (value == NULL)
 	{
 		perror("Error allocating memory for value");
@@ -39,27 +39,38 @@ int main(void)
 	{
 		if (c == '\n')
 			line_number++;
-		token = strtok(buffer, " ");
 		if (c == '$')
 		{
 			token = strtok(buffer, " ");
 			if (token != NULL)
 			{
 				strcpy(opcode, token);
+				printf("OPCODE : %s\n", opcode);
 				token = strtok(NULL, " ");
+				if (strncmp(opcode, "pall", 3) == 0)
+				{
+					pall(stack);
+					printf("\npall called success\n");
+					buffer[0] = '\0';
+					continue;
+				}
 				if (token != NULL)
 				{
 					strcpy(value, token);
+					printf("VALUE : %s\n", value);
 					buffer[0] = '\0';
 					if (strcmp(opcode, "push") == 0)
+					{
 						pushValue(&stack, line_number, atoi(value));
-					else if (strcmp(opcode, "pall") == 0)
-						pall(stack);
+						printf("push called success\n\n");
+					}
 				}
 			}
 		}
 		else if (c != '\n' && c != '\t')
+		{
 			strncat(buffer, (char *)&c, 1);
+		}
 	}
 	fclose(file);
 	free(stack);

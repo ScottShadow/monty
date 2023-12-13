@@ -1,12 +1,13 @@
 #ifndef MONTY_H
 #define MONTY_H
 
-#include <stddef.h>
+#include "macros.h"
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 
-#define MAX_OPCODE_LENGTH (sizeof(char) * 100)
-#define MAX_VALUE_LENGTH (sizeof(char) * 100)
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -18,9 +19,9 @@
  */
 typedef struct stack_s
 {
-    int n;
-    struct stack_s *prev;
-    struct stack_s *next;
+	int n;
+	struct stack_s *prev;
+	struct stack_s *next;
 } stack_t;
 
 /**
@@ -33,11 +34,24 @@ typedef struct stack_s
  */
 typedef struct instruction_s
 {
-    char *opcode;
-    void (*f)(stack_t **stack, unsigned int line_number);
+	char *opcode;
+	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-stack_t *pushValue(stack_t **stack, unsigned int line_number, int value);
+typedef struct monty_s
+{
+	char **_line;
+	char **_words;
+	stack_t *_stack;
+	FILE *_file;
+	int stk_or_que;
+	int line_num;
+
+} monty_t;
+
+int file_err(FILE *file_ptr, char *arg);
+int args_error(int argc);
 size_t pall(const stack_t *h);
+stack_t *pushValue(stack_t **stack, unsigned int line_number, int value);
 
 #endif
