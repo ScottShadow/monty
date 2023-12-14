@@ -29,13 +29,41 @@ void add(stack_t **stack, unsigned int line_number)
 	int sum;
 
 	(void)line_number;
-	sum = tempHead->n + tempNext->n;
-	pop(stack, line_number);
-	(*stack)->n = sum;
+	if (*stack != NULL && (*stack)->next != NULL)
+	{
+		sum = tempHead->n + tempNext->n;
+		pop(stack, line_number);
+		(*stack)->n = sum;
+	}
+	else
+	{
+		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
 }
 void nop(stack_t **stack, unsigned int line_number)
 {
 	(void)stack;
 	(void)line_number;
 	printf("\n------nope------\n");
+}
+void sub(stack_t **stack, unsigned int line_number)
+{
+	stack_t *tempHead = *stack;
+	stack_t *tempNext = tempHead->next;
+
+	int sub;
+
+	(void)line_number;
+	if (*stack != NULL && (*stack)->next != NULL)
+	{
+		sub = tempHead->n - tempNext->n;
+		pop(stack, line_number);
+		(*stack)->n = sub;
+	}
+	else
+	{
+		fprintf(stderr, "L%d: can't sub, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
 }

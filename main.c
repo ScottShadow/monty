@@ -29,23 +29,23 @@ void processLine(monty_t *monty, char *line, instruction_t *instructions)
     if (token != NULL)
     {
         strcpy(opcode, token);
-        printf("OPCODE : %s\n", opcode);
+        /*printf("OPCODE : %s\n", opcode);*/
         token = strtok(NULL, " ");
 
-        for (i = 0; i < 6; i++)
+        for (i = 0; i < 10; i++)
         {
             if (token != NULL && strcmp(opcode, "push") == 0)
             {
                 strcpy(global_value, token);
-                printf("VALUE : %s\n", global_value);
-                instructions[6].f(&(monty->_stack), monty->line_num);
-                printf("push called success\n\n");
+                /*printf("VALUE : %s\n", global_value);*/
+                instructions[10].f(&(monty->_stack), monty->line_num);
+                /* printf("push called success\n\n"); */
                 break;
             }
             else if (strcmp(opcode, instructions[i].opcode) == 0)
             {
                 instructions[i].f(&(monty->_stack), monty->line_num);
-                printf("\n%s called success\n", opcode);
+                /* printf("\n%s called success\n", opcode); */
                 break;
             }
         }
@@ -69,8 +69,8 @@ int initializeMonty(monty_t *monty, char **argv)
 }
 void initializeInstructions(instruction_t *instructions)
 {
-    instructions[6].opcode = "push";
-    instructions[6].f = pushValue;
+    instructions[10].opcode = "push";
+    instructions[10].f = pushValue;
     instructions[1].opcode = "pall";
     instructions[1].f = pall;
     instructions[2].opcode = "pint";
@@ -83,19 +83,26 @@ void initializeInstructions(instruction_t *instructions)
     instructions[4].f = add;
     instructions[5].opcode = "nop";
     instructions[5].f = nop;
+    instructions[6].opcode = "sub";
+    instructions[6].f = sub;
+    instructions[7].opcode = "div";
+    instructions[7].f = divide;
+    instructions[8].opcode = "mul";
+    instructions[8].f = mul;
+    instructions[9].opcode = "mod";
+    instructions[9].f = mod;
 }
 int main(int argc, char **argv)
 {
     monty_t monty = {NULL, NULL, NULL, NULL, 0, 0};
     int c;
     char buffer[100] = {'\0'};
-    instruction_t instructions[7];
+    instruction_t instructions[11];
 
     initializeInstructions(instructions);
     (void)argc;
     if (initializeMonty(&monty, argv) != 0)
         return 1;
-    printf("before while called\n");
 
     while ((c = fgetc(monty._file)) != EOF)
     {
