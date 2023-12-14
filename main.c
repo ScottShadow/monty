@@ -1,7 +1,7 @@
 #include "monty.h"
 char *global_value;
 
-void processLine(monty_t *monty, char *line)
+void processLine(monty_t *monty, char *line, instruction_t *instructions)
 {
 	char *token;
 	char *opcode;
@@ -30,10 +30,16 @@ void processLine(monty_t *monty, char *line)
 		strcpy(opcode, token);
 		printf("OPCODE : %s\n", opcode);
 		token = strtok(NULL, " ");
+
 		if (strncmp(opcode, "pall", 3) == 0)
 		{
-			pall(monty->_stack, monty->line_num);
+			instructions[1].f(&(monty->_stack), monty->line_num);
 			printf("\npall called success\n");
+		}
+		else if (strncmp(opcode, "pint", 3) == 0)
+		{
+			instructions[2].f(&(monty->_stack), monty->line_num);
+			printf("\npint called success\n");
 		}
 		else if (token != NULL)
 		{
@@ -41,7 +47,7 @@ void processLine(monty_t *monty, char *line)
 			printf("VALUE : %s\n", global_value);
 			if (strcmp(opcode, "push") == 0)
 			{
-				pushValue(&(monty->_stack), monty->line_num);
+				instructions[0].f(&(monty->_stack), monty->line_num);
 				printf("push called success\n\n");
 			}
 		}
@@ -69,15 +75,28 @@ int initializeMonty(monty_t *monty, char **argv)
 	}
 	return (0);
 }
+void initializeInstructions(instruction_t *instructions)
+{
+	instructions[0].opcode = "push";
+	instructions[0].f = pushValue;
+	instructions[1].opcode = "pall";
+	instructions[1].f = pall;
+	instructions[2].opcode = "pint";
+	instructions[2].f = pint;
+}
 int main(int argc, char **argv)
 {
 	monty_t monty;
 	int c;
 	char buffer[100] = {'\0'};
+	instruction_t instructions[3];
 
+	initializeInstructions(instructions);
 	(void)argc;
 
 	initializeMonty(&monty, argv);
+	if (initializeMonty(&monty, argv) != 0)
+		return 1;
 	printf("before while called\n");
 	while ((c = fgetc(monty._file)) != EOF)
 	{
@@ -85,7 +104,7 @@ int main(int argc, char **argv)
 			monty.line_num++;
 		if (c == '$')
 		{
-			processLine(&monty, buffer);
+			processLine(&monty, buffer, instructions);
 			buffer[0] = '\0';
 		}
 		else if (c != '\n' && c != '\t')

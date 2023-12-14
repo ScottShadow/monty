@@ -40,6 +40,26 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/**
+ * struct monty_s - Monty interpreter structure
+ * @_line: Array of strings representing the current line
+ * @_words: Array of strings representing the current line's words
+ * @_stack: Pointer to the top of the stack
+ * @_file: Pointer to the currently opened file
+ * @stk_or_que: Flag indicating whether the Monty
+ * interpreter is in stack or queue mode
+ * @line_num: Current line number being processed
+ * @instructions: Pointer to an array of instruction structures
+ *
+ * Description:
+ * This structure represents the state of the Monty interpreter
+ * and includes
+ * essential components such as the current line, stack, file,
+ * and instructions.
+ * The instruction structure provides information about
+ * available opcodes and their
+ * corresponding functions for stack, queues, LIFO, FIFO operations.
+ */
 typedef struct monty_s
 {
 	char **_line;
@@ -48,13 +68,15 @@ typedef struct monty_s
 	FILE *_file;
 	int stk_or_que;
 	int line_num;
+	instruction_t *instructions;
 
 } monty_t;
 
 int file_err(FILE *file_ptr, char *arg);
 int args_error(int argc);
-size_t pall(const stack_t *h, unsigned int line_number);
-stack_t *pushValue(stack_t **stack, unsigned int line_number);
-void processLine(monty_t *monty, char *line);
+void pall(stack_t **h, unsigned int line_number);
+void pushValue(stack_t **stack, unsigned int line_number);
+void processLine(monty_t *monty, char *line, instruction_t *instructions);
+void pint(stack_t **stack, unsigned int line_number);
 
 #endif
