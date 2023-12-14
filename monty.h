@@ -49,7 +49,6 @@ typedef struct instruction_s
  * @stk_or_que: Flag indicating whether the Monty
  * interpreter is in stack or queue mode
  * @line_num: Current line number being processed
- * @instructions: Pointer to an array of instruction structures
  *
  * Description:
  * This structure represents the state of the Monty interpreter
@@ -68,7 +67,6 @@ typedef struct monty_s
 	FILE *_file;
 	int stk_or_que;
 	int line_num;
-	instruction_t *instructions;
 
 } monty_t;
 
@@ -78,5 +76,13 @@ void pall(stack_t **h, unsigned int line_number);
 void pushValue(stack_t **stack, unsigned int line_number);
 void processLine(monty_t *monty, char *line, instruction_t *instructions);
 void pint(stack_t **stack, unsigned int line_number);
+void pop(stack_t **stack, unsigned int line_number);
+int delete_dnodeint_at_index(stack_t **head, unsigned int index);
+void swap(stack_t **stack, unsigned int line_number);
+void free_stack(stack_t *head);
+void garbageCollector(monty_t *obj);
+void free_arr_strs(char **arr);
+void add(stack_t **stack, unsigned int line_number);
+void nop(stack_t **stack, unsigned int line_number);
 
 #endif

@@ -9,9 +9,10 @@
 #define queue_flg 0
 #define stack_flg 1
 
-
-#define INIT_OBJ {NULL, NULL, NULL, NULL, 0, 0}
-
+#define INIT_OBJ                           \
+	{                                      \
+		NULL, NULL, NULL, NULL, 0, 0, NULL \
+	}
 
 /*Monty Errors*/
 #define USAGE "USAGE: monty file\n"
@@ -30,6 +31,5 @@
 #define MOD_FAIL "L%u: can't mod, stack too short\n"
 #define PCHAR_FAIL "L%u: can't pchar, stack empty\n"
 #define PCHAR_RANGE "L%u: can't pchar, value out of range\n"
-
 
 #endif
