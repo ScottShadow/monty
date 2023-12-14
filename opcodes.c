@@ -1,4 +1,5 @@
 #include "monty.h"
+
 /**
  * pushValue - adds a node to the beginning of a list
  * @stack: head node of our list
@@ -6,10 +7,11 @@
  * @line_number: the current line number
  * Return: address of new node
  */
-stack_t *pushValue(stack_t **stack, unsigned int line_number, int value)
+stack_t *pushValue(stack_t **stack, unsigned int line_number)
 {
 	stack_t *newNode;
 
+	int value = atoi(global_value);
 	(void)line_number;
 	if (stack)
 	{
@@ -31,12 +33,14 @@ stack_t *pushValue(stack_t **stack, unsigned int line_number, int value)
 /**
  * pall - prints the whole list
  * @h:header node of the list to print
+ * @line_number: the current line number
  * Return: size of elements printed
  */
-size_t pall(const stack_t *h)
+size_t pall(const stack_t *h, unsigned int line_number)
 {
 	size_t size = 0;
 
+	(void)line_number;
 	while (h)
 	{
 		printf("%d\n", h->n);

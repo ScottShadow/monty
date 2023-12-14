@@ -8,6 +8,8 @@
 #include <string.h>
 #include <unistd.h>
 
+extern char *global_value;
+
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -51,7 +53,8 @@ typedef struct monty_s
 
 int file_err(FILE *file_ptr, char *arg);
 int args_error(int argc);
-size_t pall(const stack_t *h);
-stack_t *pushValue(stack_t **stack, unsigned int line_number, int value);
+size_t pall(const stack_t *h, unsigned int line_number);
+stack_t *pushValue(stack_t **stack, unsigned int line_number);
+void processLine(monty_t *monty, char *line);
 
 #endif
