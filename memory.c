@@ -16,11 +16,18 @@ void free_stack(stack_t *head)
 		currentPointer = tempPointer;
 	}
 }
+/**
+ * garbageCollector - Frees the memory allocated for the Monty interpreter.
+ * @monty: Pointer to the Monty interpreter structure
+ */
 void garbageCollector(monty_t *monty)
 {
 	free_stack(monty->_stack);
 }
-
+/**
+ * free_arr_strs - Frees the memory allocated for an array of strings.
+ * @arr: Pointer to the array of strings
+ */
 void free_arr_strs(char **arr)
 {
 	int index;

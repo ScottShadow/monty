@@ -42,7 +42,11 @@ void pall(stack_t **stack, unsigned int line_number)
 		h = h->next;
 	}
 }
-
+/**
+ * pint - prints the head of list
+ * @stack:the list to print
+ * @line_number: the current line number
+ */
 void pint(stack_t **stack, unsigned int line_number)
 {
 	const stack_t *h = (const stack_t *)*stack;
@@ -53,6 +57,11 @@ void pint(stack_t **stack, unsigned int line_number)
 		h = h->next;
 	}
 }
+/**
+ * pop - removes the first element in the list
+ * @stack:the list to print
+ * @line_number: the current line number
+ */
 void pop(stack_t **stack, unsigned int line_number)
 {
 	(void)line_number;

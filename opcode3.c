@@ -1,4 +1,9 @@
 #include "monty.h"
+/**
+ * divide - Divides the second top element of the stack by the top element.
+ * @stack: Pointer to the head of the stack
+ * @line_number: Current line number in the Monty script
+ */
 void divide(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tempHead = *stack;
@@ -19,6 +24,11 @@ void divide(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 }
+/**
+ * mul - Multiplies the top two elements of the stack.
+ * @stack: Pointer to the head of the stack
+ * @line_number: Current line number in the Monty script
+ */
 void mul(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tempHead = *stack;
@@ -39,6 +49,12 @@ void mul(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 }
+/**
+ * mod - Computes the remainder of the division of the second top element by
+ * the top element of the stack.
+ * @stack: Pointer to the head of the stack
+ * @line_number: Current line number in the Monty script
+ */
 void mod(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tempHead = *stack;

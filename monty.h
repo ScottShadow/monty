@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-
+char *global_value;
 extern char *global_value;
 
 /**
@@ -21,9 +21,9 @@ extern char *global_value;
  */
 typedef struct stack_s
 {
-    int n;
-    struct stack_s *prev;
-    struct stack_s *next;
+	int n;
+	struct stack_s *prev;
+	struct stack_s *next;
 } stack_t;
 
 /**
@@ -36,8 +36,8 @@ typedef struct stack_s
  */
 typedef struct instruction_s
 {
-    char *opcode;
-    void (*f)(stack_t **stack, unsigned int line_number);
+	char *opcode;
+	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
 /**
@@ -61,12 +61,12 @@ typedef struct instruction_s
  */
 typedef struct monty_s
 {
-    char **_line;
-    char **_words;
-    stack_t *_stack;
-    FILE *_file;
-    int stk_or_que;
-    int line_num;
+	char **_line;
+	char **_words;
+	stack_t *_stack;
+	FILE *_file;
+	int stk_or_que;
+	int line_num;
 
 } monty_t;
 
@@ -75,6 +75,8 @@ int args_error(int argc);
 void pall(stack_t **h, unsigned int line_number);
 void pushValue(stack_t **stack, unsigned int line_number);
 void processLine(monty_t *monty, char *line, instruction_t *instructions);
+void processLineHelper(monty_t *monty,
+					   char *opcode, char *token, instruction_t *instructions);
 void pint(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
 int delete_dnodeint_at_index(stack_t **head, unsigned int index);
