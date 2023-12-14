@@ -48,6 +48,14 @@ void processLine(monty_t *monty, char *line, instruction_t *instructions)
                 /* printf("\n%s called success\n", opcode); */
                 break;
             }
+            else
+            {
+                if (i == 9)
+                {
+                    fprintf(stderr, UNKNOWN, monty->line_num, opcode);
+                    exit(EXIT_FAILURE);
+                }
+            }
         }
     }
 
@@ -61,8 +69,8 @@ int initializeMonty(monty_t *monty, char **argv)
 
     if (monty->_file == NULL)
     {
-        perror("Error opening file");
-        return (1);
+        fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+        exit(EXIT_FAILURE);
     }
 
     return (0);
@@ -99,11 +107,17 @@ int main(int argc, char **argv)
     char buffer[100] = {'\0'};
     instruction_t instructions[11];
 
+    if (argc != 2)
+    {
+        fprintf(stderr, USAGE);
+        exit(EXIT_FAILURE);
+    }
     initializeInstructions(instructions);
     (void)argc;
     if (initializeMonty(&monty, argv) != 0)
         return 1;
 
+    monty.line_num++;
     while ((c = fgetc(monty._file)) != EOF)
     {
         if (c == '\n')
