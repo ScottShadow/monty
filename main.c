@@ -176,9 +176,7 @@ int main(int argc, char **argv)
 			strncat(buffer, (char *)&c, 1);
 		}
 	}
-
 	fclose(monty._file);
 	garbageCollector(&monty);
-
 	return (0);
 }
