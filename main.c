@@ -142,6 +142,7 @@ int main(int argc, char **argv)
 {
 	monty_t monty = {NULL, NULL, NULL, NULL, 0, 0};
 	int c;
+	int isComment = 0;
 	char buffer[100] = {'\0'};
 	instruction_t instructions[11];
 
@@ -157,12 +158,18 @@ int main(int argc, char **argv)
 
 	while ((c = fgetc(monty._file)) != EOF)
 	{
-		if (c == '\n')
-			monty.line_num++;
+		if (c == '#')
+			isComment = 1;
+
 		if (c == '\n')
 		{
-			processLine(&monty, buffer, instructions);
+			if (isComment == 0)
+			{
+				monty.line_num++;
+				processLine(&monty, buffer, instructions);
+			}
 			buffer[0] = '\0';
+			isComment = 0;
 		}
 		else if (c != '\n' && c != '\t')
 		{
