@@ -84,7 +84,16 @@ void pint(stack_t **stack, unsigned int line_number)
 void pop(stack_t **stack, unsigned int line_number)
 {
 	(void)line_number;
-	delete_dnodeint_at_index(stack, 0);
+
+	if (*stack)
+	{
+		delete_dnodeint_at_index(stack, 0);
+	}
+	else
+	{
+		fprintf(stderr, POP_FAIL, line_number);
+		exit(EXIT_FAILURE);
+	}
 }
 /**
  * delete_dnodeint_at_index - deletes the node at index @index of
