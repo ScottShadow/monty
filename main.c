@@ -149,7 +149,6 @@ int main(int argc, char **argv)
 	if (initializeMonty(&monty, argv) != 0)
 		return (1);
 
-	monty.line_num++;
 	while ((c = fgetc(monty._file)) != EOF)
 	{
 		if (c == '\n')
