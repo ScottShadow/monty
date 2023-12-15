@@ -8,22 +8,31 @@
 void pushValue(stack_t **stack, unsigned int line_number)
 {
 	stack_t *newNode;
+	char *endptr;
+	long value = strtol(global_value, &endptr, 10);
 
-	int value = atoi(global_value);
-	(void)line_number;
+	if (*endptr != '\0')
+	{
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
 	if (stack)
 	{
 		newNode = malloc(sizeof(stack_t));
-		/*if (newNode == NULL)*/
-		/*return (NULL);*/
+		if (newNode == NULL)
+		{
+			fprintf(stderr, "Memory allocation error\n");
+			exit(EXIT_FAILURE);
+		}
 
 		newNode->n = value;
 		newNode->next = *stack;
+
 		if (*stack)
 			(*stack)->prev = newNode;
 
 		*stack = newNode;
-		/*return (newNode);*/
 	}
 }
 
@@ -55,6 +64,10 @@ void pint(stack_t **stack, unsigned int line_number)
 	{
 		printf("%d\n", h->n);
 		h = h->next;
+	}
+	else
+	{
+		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
 	}
 }
 /**
