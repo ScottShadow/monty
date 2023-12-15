@@ -65,7 +65,7 @@ void mod(stack_t **stack, unsigned int line_number)
 	(void)line_number;
 	if (*stack != NULL && (*stack)->next != NULL)
 	{
-		tempNext->n % tempHead->n;
+		mod = tempNext->n % tempHead->n;
 		pop(stack, line_number);
 		(*stack)->n = mod;
 	}
