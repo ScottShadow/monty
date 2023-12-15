@@ -149,7 +149,7 @@ int main(int argc, char **argv)
 	{
 		if (c == '\n')
 			monty.line_num++;
-		if (c == '$')
+		if (c == '\n')
 		{
 			processLine(&monty, buffer, instructions);
 			buffer[0] = '\0';
