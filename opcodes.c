@@ -45,6 +45,10 @@ void pall(stack_t **stack, unsigned int line_number)
 {
 	const stack_t *h = (const stack_t *)*stack;
 	(void)line_number;
+	if (!h)
+	{
+		fprintf(stderr, "L%d: can't pall, stack empty\n", line_number);
+	}
 	while (h)
 	{
 		printf("%d\n", h->n);
