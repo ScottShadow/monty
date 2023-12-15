@@ -26,6 +26,12 @@ void processLineHelper(monty_t *monty,
 		}
 		else if (strcmp(opcode, instructions[i].opcode) == 0)
 		{
+			if (i >= 5 && monty->_stack == NULL)
+			{
+				fprintf(stderr, "L%d: can't %s, stack too short\n",
+						monty->line_num, opcode);
+				exit(EXIT_FAILURE);
+			}
 			instructions[i].f(&(monty->_stack), monty->line_num);
 			break;
 		}
@@ -113,10 +119,10 @@ void initializeInstructions(instruction_t *instructions)
 	instructions[3].f = pop;
 	instructions[0].opcode = "swap";
 	instructions[0].f = swap;
-	instructions[4].opcode = "add";
-	instructions[4].f = add;
-	instructions[5].opcode = "nop";
-	instructions[5].f = nop;
+	instructions[5].opcode = "add";
+	instructions[5].f = add;
+	instructions[4].opcode = "nop";
+	instructions[4].f = nop;
 	instructions[6].opcode = "sub";
 	instructions[6].f = sub;
 	instructions[7].opcode = "div";
