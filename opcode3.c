@@ -14,6 +14,11 @@ void divide(stack_t **stack, unsigned int line_number)
 	(void)line_number;
 	if (*stack != NULL && (*stack)->next != NULL)
 	{
+		if (tempHead->n == 0)
+		{
+			fprintf(stderr, DIV_ZERO, line_number);
+			exit(EXIT_FAILURE);
+		}
 		div = tempNext->n / tempHead->n;
 		pop(stack, line_number);
 		(*stack)->n = div;
@@ -65,6 +70,11 @@ void mod(stack_t **stack, unsigned int line_number)
 	(void)line_number;
 	if (*stack != NULL && (*stack)->next != NULL)
 	{
+		if (tempHead->n == 0)
+		{
+			fprintf(stderr, DIV_ZERO, line_number);
+			exit(EXIT_FAILURE);
+		}
 		mod = tempNext->n % tempHead->n;
 		pop(stack, line_number);
 		(*stack)->n = mod;
