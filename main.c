@@ -13,8 +13,13 @@ void processLineHelper(monty_t *monty,
 
 	for (i = 0; i < 11; i++)
 	{
-		if (strcmp(opcode, "push") == 0 && token != NULL)
+		if (strcmp(opcode, "push") == 0)
 		{
+			if (token == NULL)
+			{
+				fprintf(stderr, "L%d: usage: push integer\n", monty->line_num);
+				exit(EXIT_FAILURE);
+			}
 			strcpy(global_value, token);
 			instructions[10].f(&(monty->_stack), monty->line_num);
 			break;
