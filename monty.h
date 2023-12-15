@@ -126,7 +126,7 @@ void _mod(stackk_t **stack, UNUSED unsigned int line_num);
 void _rotl(stackk_t **stack,UNUSED unsigned int line_num);
 void _rotr(stackk_t **stack, UNUSED unsigned int line_num);
 void _stack( UNUSED stackk_t **stack, UNUSED unsigned int line_num);
-void _queue(UNUSED stack_t **stack, UNUSED unsigned int line_num);
+void _queue(UNUSED stackk_t **stack, UNUSED unsigned int line_num);
 void _pchar(stackk_t **stack, UNUSED unsigned int line_num);
 void _pstr(stackk_t **stack, UNUSED unsigned int line_num);
 

@@ -89,7 +89,7 @@ void _stack( UNUSED stackk_t **stack, UNUSED unsigned int line_num)
  * @stack: pointer to the stack 
  * @line_num: number of the line in the file
  */
-void _queue(UNUSED stack_t **stack, UNUSED unsigned int line_num)
+void _queue(UNUSED stackk_t **stack, UNUSED unsigned int line_num)
 {
 	obj.stk_or_que = queue_flg;
 }

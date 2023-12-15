@@ -115,7 +115,7 @@ void _mul(stackk_t **stack, UNUSED unsigned int line_num)
 	mul = node0->n * node1->n;
 	_deleteSNodeAt(stack, 0);
 	_deleteSNodeAt(stack, 0);
-	new = prependSNode(stack, mul);
+	new = _prependSNode(stack, mul);
 	if (!new)
         memory_err();
 }
