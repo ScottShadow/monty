@@ -1,2 +1,4 @@
-push 78
-add
+push 402
+push 98
+div Holberton
+pall

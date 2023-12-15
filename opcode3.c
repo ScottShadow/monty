@@ -14,7 +14,7 @@ void divide(stack_t **stack, unsigned int line_number)
 	(void)line_number;
 	if (*stack != NULL && (*stack)->next != NULL)
 	{
-		div = tempHead->n / tempNext->n;
+		div = tempNext->n / tempHead->n;
 		pop(stack, line_number);
 		(*stack)->n = div;
 	}
@@ -65,7 +65,7 @@ void mod(stack_t **stack, unsigned int line_number)
 	(void)line_number;
 	if (*stack != NULL && (*stack)->next != NULL)
 	{
-		mod = tempHead->n % tempNext->n;
+		tempNext->n % tempHead->n;
 		pop(stack, line_number);
 		(*stack)->n = mod;
 	}

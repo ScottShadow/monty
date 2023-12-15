@@ -76,7 +76,7 @@ void sub(stack_t **stack, unsigned int line_number)
 	(void)line_number;
 	if (*stack != NULL && (*stack)->next != NULL)
 	{
-		sub = tempHead->n - tempNext->n;
+		sub = tempNext->n - tempHead->n;
 		pop(stack, line_number);
 		(*stack)->n = sub;
 	}
