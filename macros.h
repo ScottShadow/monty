@@ -5,9 +5,19 @@
 #define _FALSE 0
 #define _TRUE 1
 
+/*char flag*/
+#define NUM_F 0
+#define CHAR_F 1
+
+
 /*QUEUE OR STACK*/
-#define queue_flg 0
-#define stack_flg 1
+#define queue_flg 1
+#define stack_flg 0
+
+
+/* Cast for unused variable or arguments */
+#define UNUSED __attribute__((unused))
+
 
 
 #define INIT_OBJ {NULL, NULL, NULL, NULL, 0, 0}
