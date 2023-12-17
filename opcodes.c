@@ -101,7 +101,7 @@ void pop(stack_t **stack, unsigned int line_number)
 int delete_dnodeint_at_index(stack_t **head, unsigned int index)
 {
 	stack_t *tempPointer1;
-	stack_t *tempPointer2;
+	stack_t *tempPointer2 = NULL;
 	unsigned int i;
 
 	tempPointer1 = *head;
@@ -124,7 +124,8 @@ int delete_dnodeint_at_index(stack_t **head, unsigned int index)
 			}
 			else
 			{
-				tempPointer2->next = tempPointer1->next;
+				if (tempPointer2 != NULL)
+					tempPointer2->next = tempPointer1->next;
 
 				if (tempPointer1->next != NULL)
 					tempPointer1->next->prev = tempPointer2;

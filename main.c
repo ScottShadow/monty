@@ -11,7 +11,7 @@ void processLineHelper(monty_t *monty,
 {
 	int i;
 
-	for (i = 0; i < 11; i++)
+	for (i = 0; i < 17; i++)
 	{
 		if (strcmp(opcode, "push") == 0)
 		{
@@ -21,23 +21,30 @@ void processLineHelper(monty_t *monty,
 				exit(EXIT_FAILURE);
 			}
 			strcpy(global_value, token);
-			instructions[10].f(&(monty->_stack), monty->line_num);
+			if (monty->stk_or_que)
+				instructions[16].f(&(monty->_stack), monty->line_num);
+			else
+				instructions[17].f(&(monty->_stack), monty->line_num);
 			break;
 		}
 		else if (strcmp(opcode, instructions[i].opcode) == 0)
 		{
-			if (i >= 5 && monty->_stack == NULL)
+			if (i >= 5 && i != 14 && i != 15 && monty->_stack == NULL)
 			{
 				fprintf(stderr, "L%d: can't %s, stack too short\n",
 						monty->line_num, opcode);
 				exit(EXIT_FAILURE);
 			}
 			instructions[i].f(&(monty->_stack), monty->line_num);
+			if (strncmp(global_value, "s", 1) == 0)
+				monty->stk_or_que = 1;
+			else if (strncmp(global_value, "q", 1) == 0)
+				monty->stk_or_que = 0;
 			break;
 		}
 		else
 		{
-			if (i == 10)
+			if (i == 16)
 			{
 				fprintf(stderr, UNKNOWN, monty->line_num, opcode);
 				exit(EXIT_FAILURE);
@@ -72,6 +79,7 @@ void processLine(monty_t *monty, char *line, instruction_t *instructions)
 		free(opcode);
 		exit(EXIT_FAILURE);
 	}
+	strcpy(global_value, "NULL");
 
 	token = strtok(line, " ");
 	if (token != NULL)
@@ -109,8 +117,10 @@ int initializeMonty(monty_t *monty, char **argv)
  */
 void initializeInstructions(instruction_t *instructions)
 {
-	instructions[10].opcode = "push";
-	instructions[10].f = pushValue;
+	instructions[16].opcode = "push";
+	instructions[16].f = pushValue;
+	instructions[17].opcode = "push";
+	instructions[17].f = pushValueQueue;
 	instructions[1].opcode = "pall";
 	instructions[1].f = pall;
 	instructions[2].opcode = "pint";
@@ -131,6 +141,18 @@ void initializeInstructions(instruction_t *instructions)
 	instructions[8].f = mul;
 	instructions[9].opcode = "mod";
 	instructions[9].f = mod;
+	instructions[10].opcode = "pchar";
+	instructions[10].f = pchar;
+	instructions[11].opcode = "pstr";
+	instructions[11].f = pstr;
+	instructions[12].opcode = "rotl";
+	instructions[12].f = rotl;
+	instructions[13].opcode = "rotr";
+	instructions[13].f = rotr;
+	instructions[14].opcode = "stack";
+	instructions[14].f = stack;
+	instructions[15].opcode = "queue";
+	instructions[15].f = queue;
 }
 /**
  * main - Entry point of the Monty interpreter.
@@ -144,7 +166,7 @@ int main(int argc, char **argv)
 	int c;
 	int isComment = 0;
 	char buffer[100] = {'\0'};
-	instruction_t instructions[11];
+	instruction_t instructions[18];
 
 	if (argc != 2)
 	{

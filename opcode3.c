@@ -85,3 +85,56 @@ void mod(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 }
+/**
+ * pchar - prints the head of list as character
+ * @stack:the list to print
+ * @line_number: the current line number
+ */
+void pchar(stack_t **stack, unsigned int line_number)
+{
+	const stack_t *h = (const stack_t *)*stack;
+	int l;
+
+	(void)line_number;
+	if (h)
+	{
+		l = h->n;
+		if ((l >= 65 && l <= 90) || (l >= 97 && l <= 122))
+			printf("%c\n", h->n);
+		else
+		{
+			fprintf(stderr, "L%d: can't pchar, value out of range\n", line_number);
+			exit(EXIT_FAILURE);
+		}
+		h = h->next;
+	}
+	else
+	{
+		fprintf(stderr, "L%d: can't pchar, stack empty\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+}
+/**
+ * pstr - prints the characters in a list
+ * @stack:the list to print
+ * @line_number: the current line number
+ */
+void pstr(stack_t **stack, unsigned int line_number)
+{
+	const stack_t *h = (const stack_t *)*stack;
+	int l;
+
+	(void)line_number;
+	while (h)
+	{
+		l = h->n;
+		if ((l >= 65 && l <= 90) || (l >= 97 && l <= 122))
+			printf("%c", h->n);
+		else
+		{
+			printf("\n");
+			break;
+		}
+		h = h->next;
+	}
+}
