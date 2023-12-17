@@ -162,7 +162,7 @@ void initializeInstructions(instruction_t *instructions)
  */
 int main(int argc, char **argv)
 {
-	monty_t monty = {NULL, NULL, NULL, NULL, 0, 0};
+	monty_t monty = {NULL, NULL, NULL, NULL, 1, 0};
 	int c;
 	int isComment = 0;
 	char buffer[100] = {'\0'};
