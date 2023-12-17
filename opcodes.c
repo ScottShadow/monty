@@ -106,6 +106,8 @@ int delete_dnodeint_at_index(stack_t **head, unsigned int index)
 
 	tempPointer1 = *head;
 
+	if (!head || !(tempPointer1))
+		return (0);
 	if (tempPointer1 != NULL)
 		while (tempPointer1->prev != NULL)
 			tempPointer1 = tempPointer1->prev;
